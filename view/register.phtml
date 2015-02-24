@@ -1,6 +1,10 @@
-<form action="../register.php" method="post">
-    <label for="Name">Name</label>
-    <input type="text" placeholder="Email" name="name">
+<?php if (isset($errorMsg)): ?>
+    <p>Erreur : <?= $errorMsg ?></p>
+<?php endif ?>
+
+<form action="register.php" method="post">
+    <label for="name">Name</label>
+    <input type="text" placeholder="name" name="userName">
 
     <label for="email">Email</label>
     <input type="text" placeholder="Email" name="email">

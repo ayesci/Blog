@@ -3,9 +3,10 @@
 include "view/head.phtml";
 
 session_start();
-$db=new PDO("mysql:host=127.0.0.1;dbname=blog", "root", "troiswa");
-$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+
+// MAIN
+// ASIDE
 
 if(array_key_exists("userName", $_SESSION))
 {
@@ -16,6 +17,10 @@ else
     include "view/welcome.phtml";
 }
 
+
+// ARTICLE
+
+include "view/publication.phtml";
 
 
 

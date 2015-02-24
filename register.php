@@ -1,18 +1,30 @@
 <?php
 
 session_start();
-$db=new PDO("mysql:host=127.0.0.1;dbname=blog", "root", "troiswa");
-$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+require_once("Helper/Database.class.php");
+require_once("Model/User.class.php");
 
-$query= $db->prepare("INSERT INTO users(userName, password)
-                      VALUES(:userName, :password)");
-$query->execute(array(
-    "userName" => $_POST["userName"],
-    "password"=>$_POST['password'],
-    PASSWORD_DEFAULT)
-);
+if (array_key_exists("password", $_POST) && array_key_exists("userName", $_POST))
+{
+    $userManager = new Model_User(); // Model/User.class.php
+    $user_result = $userManager->userName_exist($_POST['userName']);
 
-$_SESSION['userName'] = $_POST['username'];
+    if ($user_result == true)
+    {
+        $errorMsg = "Nom déjà enregistré.";
+    }
+    elseif($user_result == false)
+    {
+        $new_user = $userManager->addUser($_POST['userName'], $_POST['password']);
+        header("Location: index.php");
+        exit();
+    }
+}
 
-header("Location: index.php");
-exit();
+include "view/head.phtml";
+include "view/register.phtml";
+
+
+
+
+

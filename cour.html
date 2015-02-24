@@ -1,0 +1,49 @@
+<?php
+
+/*
+** Login.php
+*/
+
+require_once("Helper/Database.class.php");
+require_once("Model/User.class.php");
+
+if (array_key_exists("password", $_POST) && array_key_exists("login", $_POST))
+{
+	// je tente de connecter l'utilisateur
+
+	$userManager = new Model_User(); // Model/User.class.php
+
+	if ($userManager->verifLogin($_POST["login"], $_POST["password"]) != false)
+{
+// enregistrer les informations utilisateur en session
+// redirection sur la page d'accueil
+}
+
+
+}
+
+include "view/login.phtml";
+
+
+/*
+** Model/User.class.php
+*/
+
+class User
+{
+private $db;
+
+public function __construct()
+{
+$this->db = new Helper_Database();
+}
+
+public verifLogin($login, $password)
+{
+// récupérer l'utilisateur ayant pour login "$login" -> le stocker dans une variable $user
+// si le mot de passe en db correspond au mot de passe entré dans le formulaire
+// -> return $user
+// sinon
+// -> return false
+}
+}

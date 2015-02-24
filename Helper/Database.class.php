@@ -1,8 +1,5 @@
 <?php
 
-session_start();
-$db = new Helper_Database("mysql:host=127.0.0.1;dbname=blog", "root", "troiswa");
-
 
 Class Helper_Database
 {
@@ -10,9 +7,13 @@ Class Helper_Database
     private $db;
 
     // methodes
-    public function __construct($queryString, $userName, $password)
+    public function __construct()
     {
-        $this->db = new PDO($queryString, $userName, $password);
+        $queryString = "mysql:host=127.0.0.1;dbname=blog";
+        $user = "root";
+        $password = "troiswa";
+        $this->db = new PDO($queryString, $user, $password);
+
         $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $this->db->exec("SET NAMES UTF8");
     }
@@ -21,7 +22,7 @@ Class Helper_Database
     {
         $query = $this->db->prepare($query);
         $query->execute($data);
-        $res = $query->fetchAll();
+        $res = $query->fetchAll(PDO::FETCH_ASSOC);
         return $res;
     }
 
@@ -29,13 +30,15 @@ Class Helper_Database
     {
         $query = $this->db->prepare($query);
         $query->execute($data);
-        $res = $query->fetch();
+        $res = $query->fetch(PDO::FETCH_ASSOC);
         return $res;
     }
+
+    public function insert($query, $data)
+    {
+        $query = $this->db->prepare($query);
+        $query->execute($data);
+        return $this->db->lastInsertId();
+    }
 }
-
-
-$userManager = $db->fetchAll("SELECT *
-                              FROM Database
-                              WHERE user = :id", array("id" => 1));
 

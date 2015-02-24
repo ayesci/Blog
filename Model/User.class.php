@@ -1,48 +1,78 @@
 <?php
 
-session_start();
-$db = new Helper_User("mysql:host=127.0.0.1;dbname=blog", "root", "troiswa");
 
-
-Class Helper_User
+Class Model_User
 {
     // propriétés
     private $db;
 
     // methodes
-    public function __construct($queryString, $userName, $password)
+    public function __construct()
     {
-        $this->db = new PDO($queryString, $userName, $password);
-        $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $this->db->exec("SET NAMES UTF8");
+        $this->db = new Helper_Database();
     }
 
-    public function fetchAll($query, $data = array())
+    public function verif_login($userName, $password)
     {
-        $query = $this->db->prepare($query);
-        $query->execute($data);
-        $res = $query->fetchAll();
-        return $res;
+        $query = "SELECT * FROM blog.users WHERE userName = :userName";
+        $data = array("userName"=>$userName);
+        $user_result = $this->db->fetchOne($query, $data);
+
+        if(password_verify($password, $user_result['password']))
+        {
+            $_SESSION['id'] = $user_result['id'];
+            $_SESSION['userName'] = $user_result['userName'];
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
-    public function fetchOne($query, $data = array())
+    public function userName_exist($userName)
     {
-        $query = $this->db->prepare($query);
-        $query->execute($data);
-        $res = $query->fetch();
-        return $res;
+        $query = "SELECT * FROM blog.users WHERE userName = :userName";
+        $data = array("userName"=>$userName);
+        $user_result = $this->db->fetchOne($query, $data);
+
+        if($user_result == true)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
+
+    public function logout()
+    {
+        session_destroy();
+    }
+
+    public function addUser($userName, $password)
+    {
+        $query= "INSERT INTO blog.users (userName, password)
+                  VALUES(:userName, :password)";
+        $data = array(
+            "userName" => $userName,
+            "password"=>password_hash($password,PASSWORD_DEFAULT)
+                    );
+        $new_user = $this->db->insert($query, $data);
+        $_SESSION['id'] = $new_user;
+        $_SESSION['userName'] = $userName;
+        return $new_user;
+    }
+
+
+
 }
 
 
-$userManager = $db->fetchAll("SELECT *
-                              FROM users
-                              WHERE user = :id", array("id" => 1));
+
+
 
 
 // FUNCTION
 
-function veriflogin ()
-{
-
-}

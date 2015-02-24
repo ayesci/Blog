@@ -1,6 +1,9 @@
+<?php if (isset($errorMsg)): ?>
+<p>Erreur : <?= $errorMsg ?></p>
+<?php endif ?>
 
 
-<form action="../login.php" method="post">
+<form action="login.php" method="post">
 
     <label for="userName">Email</label>
     <input type="text" placeholder="Email or Username" name="userName">
