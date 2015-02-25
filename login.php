@@ -18,8 +18,7 @@ if (array_key_exists("password", $_POST) && array_key_exists("userName", $_POST)
         $errorMsg = "Nom ou mot de passe incorrect.";
     }
 }
-
-
 include "view/head.phtml";
+include "view/entete.phtml";
 include "view/login.phtml";
 include "view/foot.phtml";

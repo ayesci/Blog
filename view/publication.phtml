@@ -1,6 +1,46 @@
-<head>
+<div id="principal">
 
-    <h1><?php $get_post['title'] ?></h1>
+    <?php for($i=0; $i<sizeof($post_publication); $i++): ?>
+<article>
 
+<header>
+    <h1><a href="post_details.php?id=<?= $post_publication[$i]['id']?>">
+    <?= $post_publication[$i]['title'] ?></a>
+    </h1>
+</header>
+<section>
+    <ul>
+        <li>
+    <div id="author"><i class="fa fa-user"></i>
+        <?= $post_publication[$i]['userName']?>
+    </div>
+    <div id="date"><i class="fa fa-clock-o"></i>
+        <?=
+        date('l j F Y', strtotime($post_publication[$i]['date']))  ?>
+    </div>
+    <div id="comm"><a href="post_details.php?id=<?= $post_publication[$i]['id']?>">
+            <i class="fa fa-comment"></i>
+            <?= "Comments"."["."]" ?></a>
+    </div></li>
+        <li>
+    <div id="tags"><button>
+        <i class="fa fa-tag"></i>
+        <?= $post_publication[$i]['tags'] ?></button>
+    </div></li>
+    </ul>
+</section>
 
-</head>
+<main>
+    <p>
+    <?= $post_publication[$i]['content'] ?>
+    </p>
+</main>
+
+<footer>
+    <a href="post_details.php?id=<?= $post_publication[$i]['id']?>"><button>Read More</button></a>
+</footer>
+
+</article>
+    <?php endfor ?>
+
+</div>

@@ -2,32 +2,31 @@
 
 session_start();
 require_once("Helper/Database.class.php");
-require_once("Model/User.class.php");
+require_once("Model/Post.class.php");
 
 
-$postManager = new Model_User(); // Model/User.class.php
-$post_result = $postManager->get_post($_POST['title'], $_POST['autor'], $_POST['tags'], $_POST['date'], $_POST['comm']);
-
-if ($post_result == true)
+if (array_key_exists('title', $_POST))
 {
-    header("Location: index.php");
-    exit();
+    $postManager = new Model_Post();
+    $new_post = $postManager->add_post(
+        $_POST['title'],
+        $_SESSION['id'],
+        $_POST['tags'],
+        $_POST['content']
+    );
+    if ($new_post == true)
+    {
+        header("Location: index.php");
+        exit();
+    }
+    else
+    {
+        $errorMsg = "Article non publié.";
+    }
 }
-else
-{
-    $errorMsg = "Article non publié.";
-}
-
-
-
-
-
-
-
-
-
 
 include "view/head.phtml";
+include "view/entete.phtml";
 include "view/post.phtml";
 include "view/foot.phtml";
 

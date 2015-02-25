@@ -2,7 +2,6 @@
 
 Class Model_Post
 {
-
     // propriétés
     private $db;
 
@@ -12,31 +11,37 @@ Class Model_Post
         $this->db = new Helper_Database();
     }
 
-    public function add_post($title, $author, $date, $tags, $comm)
+    public function get_post()
     {
-        $query = "INSERT INTO blog.post (title, author, date, tags, comm)
-                  VALUES (:title, :author, :date, :tags, :comm)";
+        $query = "SELECT *
+                  FROM blog.post
+                  JOIN blog.users ON users.id = post.id";
+        $post_publication = $this->db->fetchAll($query);
+        return $post_publication;
+    }
+
+    public function add_post($title, $author, $tags, $content)
+    {
+        $query = "INSERT INTO blog.post (title, author, tags, content)
+                  VALUES (:title, :author, :tags, :content)";
         $data = array(
             "title" => $title,
             "author" => $author,
-            "date" => $date,
             "tags" => $tags,
-            "comm" => $comm,
+            "content" => $content,
         );
         $new_post = $this->db->insert($query, $data);
         return $new_post;
     }
 
-    public function get_post()
+    public function get_single_post($id_post)
     {
-        $query = "SELECT * FROM blog.post";
-        $data = array(
-            "title" => $title,
-            "author" => $author,
-            "date" => $date,
-            "tags" => $tags,
-            "comm" => $comm,
-        );
+        $query = "SELECT *
+                  FROM blog.post
+                  JOIN blog.users ON users.id = post.id
+                  WHERE post.id = :id
+                  ";
+        $data = array('id' => $id_post);
         $post_publication = $this->db->fetchAll($query, $data);
         return $post_publication;
     }

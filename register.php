@@ -22,6 +22,7 @@ if (array_key_exists("password", $_POST) && array_key_exists("userName", $_POST)
 }
 
 include "view/head.phtml";
+include "view/entete.phtml";
 include "view/register.phtml";
 
 

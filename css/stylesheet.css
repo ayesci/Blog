@@ -1,0 +1,230 @@
+
+
+/* GENERAL */
+*{
+    box-sizing: border-box;
+}
+
+a, li, h1, p
+{
+    text-decoration: none;
+    list-style-type: none;
+}
+
+
+/* ENTETE */
+div#entete
+{
+    background-color: #000000;
+    height: 50px;
+}
+div#entete > p a
+{
+    text-decoration: none;
+    color: grey;
+    line-height: 50px;
+    margin-left: 100px;
+    font-size: 1.3rem;
+}
+
+div#entete > p a:hover
+{
+    color: white;
+}
+
+
+
+/* PRINCIPALE */
+div#principal
+{
+    width: 850px;
+    margin-left: 100px;
+}
+
+
+/* ARTICLE */
+article
+{
+    margin-top: 20px;
+    border: 1px grey solid;
+    border-radius: 5px;
+    box-shadow: dimgrey 2px;
+    width: 640px;
+    padding: 20px;
+    float: left;
+    display: inline-block;
+    position: relative;
+
+}
+/* ARTICLE Header */
+article header h1
+{
+    padding: 10px 0;
+}
+article header h1 a
+{
+    color: cornflowerblue;
+    font-size: 1.8rem;
+}
+article header h1:hover
+{
+    text-decoration: underline;
+    color: cornflowerblue;
+    font-size: 1.8rem;
+}
+/* ARTICLE section */
+article section
+{
+    border-bottom: 1px darkgrey solid;
+    border-top: 1px darkgrey solid;
+    position: relative;
+    min-height: 100px;
+}
+article section div#author, div#date
+{
+    display: inline-block;
+    padding: 20px 0;
+}
+article div#comm
+{
+    display: inline-block;
+    text-decoration: none;
+    color: #23527C;
+    position: absolute;
+    bottom: 60px;
+    right: 0;
+}
+article div#comm a:hover
+{
+    text-decoration: underline;
+}
+article div#tags
+{
+
+}
+article div#tags button:hover
+{
+    background-color: darkgrey;
+    border-radius: 5px;
+}
+/* ARTICLE main */
+article main p
+{
+    padding-top: 30px;
+}
+/* ARTICLE footer */
+article footer
+{
+    min-height: 50px;
+}
+article footer a
+{
+    text-decoration: none;
+    color: #000000;
+}
+article footer button
+{
+    margin: 10px;
+    padding: 10px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+article footer button:hover
+{
+    background-color: darkgrey;
+    border-radius: 5px;
+}
+
+
+
+/* ASIDE */
+aside
+{
+    margin-left: 100px;
+    margin-top: 20px;
+    width: 360px;
+    display: inline-block;
+    font-size: 0.8rem;
+}
+aside > div#welcome, div#popular
+{
+    margin-bottom: 20px;
+    border: 1px grey solid;
+    border-radius: 5px;
+    box-shadow: dimgrey 2px;
+    background-color: lightgray;
+    padding: 20px;
+}
+aside > div#welcome p
+{
+    margin-bottom: 20px;
+}
+aside > div#welcome ul li
+{
+    margin-bottom: 5px;
+}
+aside > div#popular h3
+{
+    padding-bottom: 10px;
+}
+
+
+/* FORMULAIRE user */
+
+/* FORMULAIRE post */
+
+form
+{
+    width: 650px;
+    margin: 0 auto;
+    border: 2px grey solid;
+    border-radius: 5px;
+    padding: 20px 50px;
+}
+label
+{
+    text-decoration: bolder;
+    margin-top: 20px;
+}
+input
+{
+    width: 100%;
+    margin-bottom: 20px;
+}
+textarea
+{
+    width: 100%;
+    margin-bottom: 20px;
+}
+input#submit
+{
+    width: 20%;
+    margin: auto;
+}
+
+
+/* FORMULAIRE Login */
+
+div#login
+{
+    width: 650px;
+    background-color: lightgray;
+    border: 2px grey solid;
+    border-radius:10px;
+    margin: 20px auto;
+}
+div#login > form
+{
+    border: none;
+}
+div#login > form > label
+{
+    margin-top: none;
+}
+div#login > p
+{
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+}
